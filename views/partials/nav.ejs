@@ -46,3 +46,9 @@
     </div>
   </div>
 </nav>
+
+<% if (locals.error) { %>
+<div class="container mt-4">
+  <div class="alert alert-danger" role="alert">Incorrect Email or Password</div>
+</div>
+<% } %>
