@@ -2,20 +2,42 @@
 <html lang="en">
   <head>
     <%- include('./partials/head') %>
-    <title>Homepage</title>
+    <title>I-Blogify</title>
   </head>
   <body>
     <%- include('./partials/nav') %>
 
-    <div class="container mt-3">
-      <div class="row row-cols-4">
+    <div class="container mt-3 mb-3">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
         <% blogs.forEach(blog => { %>
         <div class="col">
-          <div class="card col" style="width: 18rem">
-            <img src="<%= blog.coverImageURL %>" class="card-img-top" />
+          <div class="card h-100">
+            <img
+              src="<%= blog.coverImageURL %>"
+              class="card-img-top"
+              style="width: 100%; height: 150px; object-fit: cover"
+            />
             <div class="card-body">
-              <h5 class="card-title"><%= blog.title %></h5>
-              <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+              <h5
+                class="card-title"
+                style="height: 60px; overflow: hidden; text-overflow: ellipsis"
+              >
+                <%= blog.title %>
+              </h5>
+              <div class="row">
+                <div class="col">
+                  <a href="/blog/<%= blog._id %>" class="btn btn-primary"
+                    >View</a
+                  >
+                </div>
+                <div class="col mt-2">
+                  <% const createdAt = new Date(blog.createdAt); %>
+                  <p>
+                    <%= createdAt.getDate() %>/<%= createdAt.getMonth() + 1
+                    %>/<%= createdAt.getFullYear() %>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

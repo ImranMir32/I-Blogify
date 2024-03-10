@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <%- include('./partials/head') %>
-    <title>Blog</title>
+    <title>I-Blogify | Blog</title>
   </head>
   <body>
     <%- include('./partials/nav') %>
@@ -14,8 +14,9 @@
     </div>
 
     <div class="container mt-4">
-      <img src="<%= blog.createdBy.profileImageURL %>" width="50px" /> <%=
-      blog.createdBy.fullName %>
+      <h5>Author :</h5>
+      <img src="<%= blog.createdBy.profileImageURL %>" width="50px" />
+      <%= blog.createdBy.name %>
     </div>
 
     <div class="container mt-3">

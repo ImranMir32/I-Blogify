@@ -14,17 +14,34 @@ const renderLogout = (req, res) => {
 
 const userSignup = async (req, res) => {
   const { name, email, password } = req.body;
-  await Users.create({
-    name,
-    email,
-    password,
-  });
-  return res.redirect("/");
+
+  if (!name || !email || !password) {
+    return res.render("signup", {
+      error: "All the field is required",
+    });
+  }
+  try {
+    await Users.create({
+      name,
+      email,
+      password,
+    });
+    return res.redirect("/");
+  } catch (error) {
+    return res.render("signup", {
+      error: "Email is alread used",
+    });
+  }
 };
 
 const userSignin = async (req, res) => {
   const { email, password } = req.body;
   console.log(email, password);
+  if (!email || !password) {
+    return res.render("signin", {
+      error: "All the field is required",
+    });
+  }
   try {
     const token = await Users.matchPasswordAndCreateToken(email, password);
     return res.cookie("token", token).redirect("/");
