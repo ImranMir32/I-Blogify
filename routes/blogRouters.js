@@ -7,6 +7,7 @@ const {
   getTheBlog,
   createBlog,
   createComment,
+  getUserBlogs,
 } = require("../controllers/blogsControllers");
 
 const router = express.Router();
@@ -23,7 +24,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.get("/add-new", getAllBlogs).get("/:id", getTheBlog);
+router
+  .get("/add-new", getAllBlogs)
+  .get("/my-blogs", getUserBlogs)
+  .get("/:id", getTheBlog);
 
 router
   .post("/", upload.single("coverImage"), (req, res) => {

@@ -12,6 +12,12 @@ const renderLogout = (req, res) => {
   res.clearCookie("token").redirect("/");
 };
 
+const renderUserProfile = (req, res) => {
+  res.render("userProfile", {
+    user: req.user,
+  });
+};
+
 const userSignup = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -56,6 +62,7 @@ module.exports = {
   renderSignin,
   renderSignup,
   renderLogout,
+  renderUserProfile,
   userSignup,
   userSignin,
 };

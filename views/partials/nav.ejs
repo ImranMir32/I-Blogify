@@ -23,7 +23,7 @@
 
         <% if (locals.user) { %>
         <li class="nav-item">
-          <a class="nav-link" href="#">My Blogs</a>
+          <a class="nav-link" href="/blog/my-blogs">My Blogs</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/blog/add-new">Add Blog</a>
@@ -39,7 +39,9 @@
             <%= locals.user.name %>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li>
+              <a class="dropdown-item" href="/user/user-profile">Profile</a>
+            </li>
             <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
           </ul>
         </li>

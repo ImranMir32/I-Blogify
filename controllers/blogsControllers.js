@@ -20,6 +20,21 @@ const getTheBlog = async (req, res) => {
   });
 };
 
+const getUserBlogs = async (req, res) => {
+  try {
+    const blogs = await Blogs.find({ createdBy: req.user._id });
+    // console.log("my blogs", req.user);
+    return res.render("myBlogs", {
+      user: req.user,
+      blogs,
+    });
+  } catch (error) {
+    // Handle error
+    console.error(error);
+    return res.render("myBlogs");
+  }
+};
+
 const createBlog = async (req, res, filename) => {
   const { title, body } = req.body;
   const blog = await Blogs.create({
@@ -43,6 +58,7 @@ const createComment = async (req, res) => {
 module.exports = {
   getAllBlogs,
   getTheBlog,
+  getUserBlogs,
   createBlog,
   createComment,
 };
