@@ -9,6 +9,10 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
+router.get("/logout", (req, res) => {
+  res.clearCookie("token").redirect("/");
+});
+
 router.post("/signup", async (req, res) => {
   const { name, email, password } = req.body;
   await Users.create({
