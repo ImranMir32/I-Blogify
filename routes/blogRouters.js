@@ -8,6 +8,8 @@ const {
   createBlog,
   createComment,
   getUserBlogs,
+  updateBlog,
+  deleteBlog,
 } = require("../controllers/blogsControllers");
 
 const router = express.Router();
@@ -34,5 +36,8 @@ router
     createBlog(req, res, req.file.filename);
   })
   .post("/comment/:blogId", createComment);
+
+router.patch("/update/:blogId", updateBlog);
+router.delete("/delete/:blogId", deleteBlog);
 
 module.exports = router;

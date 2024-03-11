@@ -1,6 +1,7 @@
 require("./config/db");
 const path = require("path");
 const express = require("express");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const Blogs = require("./models/blogs.model");
@@ -14,6 +15,8 @@ const {
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors());
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
 app.use(express.static(path.resolve("./public")));

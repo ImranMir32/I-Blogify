@@ -55,10 +55,57 @@ const createComment = async (req, res) => {
   return res.redirect(`/blog/${req.params.blogId}`);
 };
 
+const updateBlog = async (req, res) => {
+  console.log("updated");
+  try {
+    const blog = await Blogs.findById(req.params.blogId);
+    if (!blog) {
+      return res.status(404).json("blog is not found!");
+    }
+
+    const updateBlog = await Blogs.findByIdAndUpdate(
+      req.params.blogId,
+      req.body,
+      {
+        new: true,
+      }
+    );
+
+    res.status(200).send({ blog: updateBlog });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+const deleteBlog = async (req, res) => {
+  try {
+    // Find the blog by ID
+    const blog = await Blogs.findById(req.params.blogId);
+    if (!blog) {
+      return res.render("blog", {
+        error: "The Blog is not found",
+      });
+    }
+
+    // Remove the blog
+    await Blogs.findByIdAndDelete(req.params.blogId);
+
+    // Find and remove all comments associated with the blog
+    await Comments.deleteMany({ blogId: req.params.blogId });
+
+    return res.status(200).send({ ok: true });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Internal Server Error");
+  }
+};
+
 module.exports = {
   getAllBlogs,
   getTheBlog,
   getUserBlogs,
   createBlog,
   createComment,
+  updateBlog,
+  deleteBlog,
 };
