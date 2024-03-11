@@ -32,7 +32,7 @@ const userSignup = async (req, res) => {
       email,
       password,
     });
-    return res.redirect("/");
+    return res.render("signin");
   } catch (error) {
     return res.render("signup", {
       error: "Email is alread used",
